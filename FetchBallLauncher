@@ -1,0 +1,52 @@
+//Sketch created by Alan da Silva Morais https://www.facebook.com/alankmorais
+
+const int limitSwitch = 6;     // the number of the pushbutton pin
+const int releaseb = 9;      // the number of the SERVO release the ball pin
+
+// variables will change:
+int buttonState = 0;         // variable for reading the pushbutton status
+int in3 = 2;
+int in4 = 4;
+#include <Servo.h>
+
+Servo myservo;  // create servo object to control a servo
+// twelve servo objects can be created on most boards
+
+int pos = 0;    // variable to store the servo position
+
+void setup() {
+  // put your setup code here, to run once:
+  // initialize the SERVO pin as an output:
+  pinMode(releaseb, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+  pinMode(limitSwitch, INPUT);{
+  myservo.attach(9);  // attaches the servo on pin 8 to the servo object
+  }}
+
+
+void TurnMotorA(){              
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+}
+
+
+void loop() {
+  // read the state of the pushbutton value:
+  buttonState = digitalRead(limitSwitch);
+
+  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  if (buttonState == LOW) {
+    // turn DC on:
+    digitalWrite(in3, HIGH);
+    digitalWrite(in4, LOW);
+    delay(4000);
+    myservo.write(180);
+  } else {
+
+        // turn DC off:
+    myservo.write(0);
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, LOW);
+  }
+}
